@@ -28,9 +28,9 @@ sudo free
 sudo echo "/var/swap.img none swap sw 0 0" >> /etc/fstab
 cd
 
-wget https://github.com/zabtc/Northern/releases/download/2.4.0/northern-2.4.0-x86_64-linux-gnu.tar.gz
-tar -xzf northern-2.4.0-x86_64-linux-gnu.tar.gz
-rm -rf northern-2.4.0-x86_64-linux-gnu.tar.gz
+wget https://github.com/panamcoin/Panam/releases/download/1.0.0/panam-1.0.0-x86_64-linux-gnu.tar.gz
+tar -xzf panam-1.0.0-x86_64-linux-gnu.tar.gz
+rm -rf panam-1.0.0-x86_64-linux-gnu.tar.gz
 
 sudo apt-get install -y ufw
 sudo ufw allow ssh/tcp
@@ -38,39 +38,32 @@ sudo ufw limit ssh/tcp
 sudo ufw logging on
 echo "y" | sudo ufw enable
 sudo ufw status
-sudo ufw allow 6942/tcp
+sudo ufw allow 45788/tcp
   
 cd
-mkdir -p .northern
-echo "staking=1" >> northern.conf
-echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> northern.conf
-echo "rpcpassword=pass"`shuf -i 100000-10000000 -n 1` >> northern.conf
-echo "rpcallowip=127.0.0.1" >> northern.conf
-echo "listen=1" >> northern.conf
-echo "server=1" >> northern.conf
-echo "daemon=1" >> northern.conf
-echo "logtimestamps=1" >> northern.conf
-echo "maxconnections=256" >> northern.conf
-echo "addnode=209.250.233.104" >> northern.conf
-echo "addnode=45.77.82.101" >> northern.conf
-echo "addnode=138.68.167.127" >> northern.conf
-echo "addnode=207.246.86.118" >> northern.conf
-echo "addnode=149.56.4.247" >> northern.conf
-echo "addnode=149.56.4.246" >> northern.conf
-echo "addnode=149.56.4.245" >> northern.conf
-echo "addnode=149.56.4.244" >> northern.conf
-echo "addnode=149.56.4.243" >> northern.conf
-echo "addnode=149.56.4.242" >> northern.conf
-echo "addnode=149.56.4.241" >> northern.conf
-echo "port=6942" >> northern.conf
-mv northern.conf .northern
+mkdir -p .panam
+echo "staking=1" >> panam.conf
+echo "rpcuser=user"`shuf -i 100000-10000000 -n 1` >> panam.conf
+echo "rpcpassword=pass"`shuf -i 100000-10000000 -n 1` >> panam.conf
+echo "rpcallowip=127.0.0.1" >> panam.conf
+echo "listen=1" >> panam.conf
+echo "server=1" >> panam.conf
+echo "daemon=1" >> panam.conf
+echo "logtimestamps=1" >> panam.conf
+echo "maxconnections=256" >> panam.conf
+echo "addnode=144.202.7.89" >> panam.conf
+echo "addnode=149.28.49.245" >> panam.conf
+echo "addnode=45.76.22.27" >> panam.conf
+echo "addnode=107.191.49.158" >> panam.conf
+echo "port=45788" >> panam.conf
+mv panam.conf .panam
 
   
 cd
-./northernd -daemon
+./panamd -daemon
 sleep 30
-./northern-cli getinfo
+./panam-cli getinfo
 sleep 5
-./northern-cli getnewaddress
-echo "Use the address above to send your NORT coins to this server"
-echo "If you found this helpful, please donate NORT to NNq96FUcDRj62vX5CdbNeAFjG3MTYeeeHn"
+./panam-cli getnewaddress
+echo "Use the address above to send your PANAM coins to this server"
+
